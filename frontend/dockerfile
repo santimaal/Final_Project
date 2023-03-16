@@ -1,0 +1,16 @@
+# Primera etapa: construye el frontend
+FROM node:14-alpine as frontend
+
+# Establece el directorio de trabajo para el frontend
+WORKDIR /app
+
+# Copia los archivos necesarios para el frontend
+COPY . .
+
+EXPOSE 3000
+
+# Instala las dependencias
+RUN npm install
+
+# Construye la aplicación
+RUN npm run build

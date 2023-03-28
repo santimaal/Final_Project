@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'src.apps.user',
+    'src.apps.sports',
     'src.apps.notifications',
     'src.apps.telegram',
     'corsheaders',

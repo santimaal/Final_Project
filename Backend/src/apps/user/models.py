@@ -85,6 +85,7 @@ class ProfileUsr(TimestampedModel, models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     avatar = models.CharField(
         max_length=100, blank=True, default='https://i.postimg.cc/T3g6d9nk/image.png')
+    balance = models.IntegerField(blank=True, default=0)
     biography = models.CharField(
         max_length=100, blank=True, default='User active with rent bikes')
     notis = models.IntegerField(blank=True, default=0)

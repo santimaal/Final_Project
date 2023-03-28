@@ -1,5 +1,7 @@
+import DemoCarousel from "../Carousel/Carousel"
+
 export default function HomeComponent() {
     return (
-        <h1>Hola</h1>
+        <DemoCarousel></DemoCarousel>
     )
 }

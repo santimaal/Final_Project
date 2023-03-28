@@ -11,10 +11,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Header() {
 
     const alocation = useLocation()
+    const [hClass] = useState(alocation.pathname.replace('/', '') == 'home' || alocation.pathname == '/' ? 'header fixed z-10 bg-black' : 'header')
     const [location, setLocation] = useState(alocation.pathname.replace('/', ''))
     const { user, isAdmin } = useContext(AuthContextProvider)
     const links = ["HOME"]
-    user ? isAdmin ? links.push( "STATION", "SLOT", "BIKE", "USER", "LOGOUT") : links.push("LOGOUT") : links.push("SIGNIN", "SIGNUP");
+    user ? isAdmin ? links.push("STATION", "SLOT", "BIKE", "USER", "LOGOUT") : links.push("LOGOUT") : links.push("SIGNIN", "SIGNUP");
     const { logout } = useAuth()
     const [show, setShow] = useState(false)
 
@@ -28,7 +29,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="header" id="header">
+            <div className={hClass} id="header">
                 <div className="logo"><Link to="Home"><img src="/assets/logos/graygreenwheels.png" alt="greenwheels" width="200vh" /></Link></div>
                 <div className="header-profile">
                     {user && (

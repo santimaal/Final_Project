@@ -1,6 +1,6 @@
 // // context
 import { AuthContextProvider } from "./context/AuthContext";
-// import { StationsContextProvider } from "./context/StationsContext";
+import { SportsContextProvider } from "./context/SportsContext";
 
 // // components
 import Header from './components/Header/Header'
@@ -12,7 +12,7 @@ import { NoAuthGuard } from './services/guards/AuthGuard';
 import { AuthGuard } from './services/guards/AuthGuard';
 
 // // import logo from './logo.svg';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import React, { Suspense } from 'react';
 import './App.css';
 
@@ -33,6 +33,7 @@ import "react-toastify/dist/ReactToastify.css";
 // const Bikes = React.lazy(() => import("./pages/Bikes/Bikes"))
 // const AddBike = React.lazy(() => import("./pages/Bikes/CreateBike"))
 const Home = React.lazy(() => import("./pages/Home/Home"))
+const Reserve = React.lazy(() => import("./pages/Reserve/Reserve"))
 // const Station = React.lazy(() => import("./pages/Station/Stations"))
 // const Slot = React.lazy(() => import("./pages/Slot/Slots"))
 // const UserList = React.lazy(() => import("./pages/User/List_Users_Admin"))
@@ -46,12 +47,14 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <Header />
-        <ToastContainer />
+        <SportsContextProvider >
+          <Header />
+          <ToastContainer />
           <Routes>
             {/* All users */}
             <Route path="/" element={<Suspense fallback={<SpinnerLoading />}><Home /></Suspense>} />
             <Route path="home" element={<Suspense fallback={<SpinnerLoading />}><Home /></Suspense>} />
+            <Route path="reserve" element={<Suspense fallback={<SpinnerLoading />}><Reserve /></Suspense>} />
             {/* Dashoboards  Admin */}
             {/* <Route element={<Suspense fallback={<SpinnerLoading />}><AdminGuard /></Suspense>}>
               <Route path="bike" element={<Suspense fallback={<SpinnerLoading />}><Bikes /></Suspense>} />
@@ -70,7 +73,9 @@ function App() {
               <Route path="incident" element={<Suspense fallback={<SpinnerLoading />}><Incident /></Suspense>} />
               <Route path="profile" element={<Suspense fallback={<SpinnerLoading />}><Profile /></Suspense>} />
             </Route> */}
+            <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
+        </SportsContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   );

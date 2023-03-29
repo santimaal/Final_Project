@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'src.apps.user',
     'src.apps.sports',
+    'src.apps.fields',
     'src.apps.notifications',
     'src.apps.telegram',
     'corsheaders',

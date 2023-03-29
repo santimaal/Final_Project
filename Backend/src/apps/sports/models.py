@@ -6,7 +6,7 @@ from src.apps.core.models import TimestampedModel
 
 class Sport(TimestampedModel, models.Model):
     name = models.CharField(max_length=100, blank=False)
-    img = models.CharField(max_length=100, blank=True)
+    img = models.CharField(max_length=200, blank=True)
 
     class Meta:
         verbose_name_plural = 'Sports'

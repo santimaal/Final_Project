@@ -19,6 +19,13 @@ class SportsView(viewsets.GenericViewSet):
 
     def getSports(self, request):
         return JsonResponse(SportsSerializer.getSports(), safe=False)
+    
+    def createSport(self, request):
+        sport_data = request.data
+        sport_serializer = SportsSerializer(data=sport_data)
+        if (sport_serializer.is_valid(raise_exception=True)):
+            sport_serializer.save()
+        return Response(sport_serializer.data)
 
 
 # class OnlyAdmin(viewsets.GenericViewSet):

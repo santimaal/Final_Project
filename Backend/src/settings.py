@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'src.apps.user',
     'src.apps.sports',
     'src.apps.fields',
+    'src.apps.reserves',
     'src.apps.notifications',
     'src.apps.telegram',
     'corsheaders',

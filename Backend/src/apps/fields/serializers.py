@@ -10,7 +10,7 @@ class FieldsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Field
-        fields = ('id', 'sport', 'active', 'active', 'slug', 'img')
+        fields = ('id', 'sport', 'active', 'active', 'slug', 'img', 'pfh')
 
     def to_fields(instance):
         return {
@@ -18,7 +18,8 @@ class FieldsSerializer(serializers.ModelSerializer):
             'sport': instance.sport.name,
             'slug': instance.slug,
             'active': instance.active,
-            'img': instance.img
+            'img': instance.img,
+            'pfh': instance.pfh
         }
 
     def getFields():

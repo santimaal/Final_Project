@@ -1,6 +1,6 @@
 export default function SignIn() {
 return (
-    <div class="signin test-white">
+    <div className="signin test-white">
         holaa
     </div>
 )

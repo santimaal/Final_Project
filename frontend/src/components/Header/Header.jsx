@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Header() {
 
     const alocation = useLocation()
-    const [hClass] = useState(alocation.pathname.replace('/', '') == 'home' || alocation.pathname == '/' ? 'header fixed z-10 bg-black' : 'header')
+    const [hClass, sethClass] = useState(alocation.pathname.replace('/', '') == 'home' || alocation.pathname == '/' ? 'header fixed z-10 bg-black' : 'header')
     const [location, setLocation] = useState(alocation.pathname.replace('/', ''))
     const { user, isAdmin } = useContext(AuthContextProvider)
     const links = ["HOME", "RESERVE"]
@@ -24,13 +24,17 @@ export default function Header() {
     }
 
     const print = links.map(item => {
-        return item !== "LOGOUT" ? <Link to={"/" + item.toLowerCase()} className={changeCN(item)} key={item} onClick={() => setShow(false)}>{item}</Link> : <Link to={alocation.pathname} onClick={() => { logout(); setShow(false) }} className={changeCN(item)} key={item}>{item}</Link>
+        return item !== "LOGOUT" ? <Link to={"/" + item.toLowerCase()} className={changeCN(item)} key={item} onClick={() => { setShow(false); changeHd(item) }}>{item}</Link> : <Link to={alocation.pathname} onClick={() => { logout(); setShow(false); changeHd(item) }} className={changeCN(item)} key={item}>{item}</Link>
     })
+
+    const changeHd = (item) => {
+        sethClass(item.toLowerCase() == 'home' || item == '/' ? 'header fixed z-10 bg-black' : 'header')
+    }
 
     return (
         <>
             <div className={hClass} id="header">
-                <div className="logo"><Link to="Home"><img src="/assets/logos/graygreenwheels.png" alt="greenwheels" width="200vh" /></Link></div>
+                <div className="logo"><Link to="Home"><img src="/assets/logos/graygreenwheels.png" alt="Sporty" width="200vh" /></Link></div>
                 <div className="header-profile">
                     {user && (
                         <>

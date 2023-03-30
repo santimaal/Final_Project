@@ -31,6 +31,7 @@ def create_sports(n_sports, n_fields):
             current_sport = serializer_sport.save()
         for j in range(n_fields):
             field_serializer = FieldsSerializer(data={'sport':current_sport.id})
+            field_serializer = FieldsSerializer(data={'img':current_sport.img})
             if (field_serializer.is_valid(raise_exception=True)):
                 field_serializer.save()
 

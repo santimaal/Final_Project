@@ -19,6 +19,7 @@ from rest_framework.views import APIView
 
 class FieldView(viewsets.GenericViewSet):
 
+# not finished
     def getFields(self, request):
         return JsonResponse(FieldsSerializer.getFields(), safe=False)
 

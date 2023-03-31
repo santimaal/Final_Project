@@ -1,5 +1,9 @@
+import { useSports } from "../../hooks/useSport"
+import DemoCarousel from "../Carousel/Carousel"
+
 export default function HomeComponent() {
+    const { sports } = useSports()
     return (
-        <h1>Hola</h1>
+        <DemoCarousel sports={sports}></DemoCarousel>
     )
 }

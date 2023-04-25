@@ -1,16 +1,16 @@
 from rest_framework import serializers
 from src.apps.reserves.models import Reserve
-from src.apps.sports.models import Sport
-from src.apps.sports.serializers import SportsSerializer
 import json
 from django.core.serializers import serialize
+from datetime import datetime, time, timedelta
 
 
 class ReservesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reserve
-        Reserves = ('id', 'date_ini', 'date_ini', 'field', 'user')
+        fields = '__all__'
+        Reserves = ('id', 'date_ini', 'date_fin', 'field', 'user')
 
     def to_reserves(instance):
         return {
@@ -21,10 +21,27 @@ class ReservesSerializer(serializers.ModelSerializer):
             'date_fin': instance.date_fin,
         }
 
-    def getFields():
+    def getReserves():
         Reserves = Reserve.objects.all()
         serialized = []
         for reserve in Reserves.iterator():
             Reserves = ReservesSerializer.to_reserves(reserve)
             serialized.append(Reserves)
+        return serialized
+
+    def getReservesByField(id, day=None):
+        if day is None:
+            day = datetime.today()
+        else:
+            day = datetime.strptime(day, '%Y-%m-%d').date()
+
+        date_ini = datetime.combine(day, time.min)
+        date_end = datetime.combine(day + timedelta(days=1), time.min)
+
+        Reserves = Reserve.objects.filter(
+            field=id, date_ini__range=(date_ini, date_end))
+        serialized = []
+        for reserve in Reserves.iterator():
+            serializer = ReservesSerializer(reserve, many=False)
+            serialized.append(serializer.data)
         return serialized

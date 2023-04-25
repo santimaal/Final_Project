@@ -1,7 +1,8 @@
-export default function SignUp() {
+import Signup_Form from "../../components/SignIn/Signup";
+
+export default function Signup() {
+
     return (
-        <div className="text-white">
-            hola
-        </div>
+        <Signup_Form />
     )
 }

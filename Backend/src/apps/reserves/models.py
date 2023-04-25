@@ -9,7 +9,7 @@ class Reserve(TimestampedModel, models.Model):
 
    field = models.ForeignKey(Field, on_delete=models.CASCADE)
    user = models.ForeignKey(User, on_delete=models.CASCADE)
-   date_ini = models.DateTimeField(editable=False, default=datetime.datetime.now)
+   date_ini = models.DateTimeField(editable=True, default=datetime.datetime.now)
    date_fin = models.DateTimeField(editable=True, default=datetime.datetime.now)
 
    class Meta:

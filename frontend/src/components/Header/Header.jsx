@@ -34,7 +34,7 @@ export default function Header() {
     return (
         <>
             <div className={hClass} id="header">
-                <div className="logo"><Link to="Home"><img src="/assets/logos/graygreenwheels.png" alt="Sporty" width="200vh" /></Link></div>
+                <div className="logo"><Link to="home"><img src="/assets/logos/graygreenwheels.png" alt="Sporty" width="200vh" /></Link></div>
                 <div className="header-profile">
                     {user && (
                         <>

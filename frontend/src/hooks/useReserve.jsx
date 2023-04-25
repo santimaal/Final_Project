@@ -17,11 +17,14 @@ export function useReserve() {
         return rtrn
     }, [setReserves]);
 
-    const createReserve = useCallback(async (date) => {
-        console.log(date)
-        await ReserveService.createReserve(date)
+    const createReserve = useCallback(async (data) => {
+        console.log(data)
+        await ReserveService.createReserve(data)
             .then(({ data }) => {
+                toast.success('Reserve added successfully at '+ new Date(data.date_ini).toUTCString())
                 console.log(data)
+            }).catch((err)=> {
+                toast.error(err.response.data[0])
             })
     })
 

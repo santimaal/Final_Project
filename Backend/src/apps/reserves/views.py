@@ -34,7 +34,4 @@ class OnlyUser(viewsets.GenericViewSet):
     def createReserve(self, request):
         reserve_data = request.data
         reserve_data['user'] = request.user.id
-        reserve_serializer = ReservesSerializer(data=reserve_data)
-        if (reserve_serializer.is_valid(raise_exception=True)):
-            reserve_serializer.save()
-        return Response(reserve_serializer.data)
+        return Response(ReservesSerializer.createReserve(reserve_data))

@@ -41,7 +41,7 @@ const Reserve = React.lazy(() => import("./pages/Reserve/Reserve"))
 // const Incident = React.lazy(() => import("./pages/Incident/Incident"))
 const Signin = React.lazy(() => import("./pages/SignIn/SignIn"))
 const Signup = React.lazy(() => import("./pages/SignIn/SignUp"))
-// const Profile = React.lazy(() => import("./pages/User/Profile"))
+const Profile = React.lazy(() => import("./pages/User/Profile"))
 
 function App() {
   return (
@@ -69,10 +69,10 @@ function App() {
               <Route path="signin" element={<Suspense fallback={<SpinnerLoading />}><Signin /></Suspense>} />
               <Route path="signup" element={<Suspense fallback={<SpinnerLoading />}><Signup /></Suspense>} />
             </Route>
-            {/* <Route element={<AuthGuard />}>
-              <Route path="incident" element={<Suspense fallback={<SpinnerLoading />}><Incident /></Suspense>} />
+            <Route element={<AuthGuard />}>
+              {/* <Route path="incident" element={<Suspense fallback={<SpinnerLoading />}><Incident /></Suspense>} /> */}
               <Route path="profile" element={<Suspense fallback={<SpinnerLoading />}><Profile /></Suspense>} />
-            </Route> */}
+            </Route>
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         </SportsContextProvider>

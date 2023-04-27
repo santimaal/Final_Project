@@ -19,13 +19,19 @@ from rest_framework.views import APIView
 
 class ReserveView(viewsets.GenericViewSet):
 
-# not finished
+    # not finished
     def getReserves(self, request):
-        return JsonResponse(ReservesSerializer.getFields(), safe=False)
+        return JsonResponse(ReservesSerializer.getReserves(), safe=False)
+
+    def getReservesByField(self, request, id):
+        day = request.data.get('day', None)
+        return JsonResponse(ReservesSerializer.getReservesByField(id, day=day), safe=False)
+
+
+class OnlyUser(viewsets.GenericViewSet):
+    permission_classes = [IsAuthenticated]
 
     def createReserve(self, request):
         reserve_data = request.data
-        reserve_serializer = ReservesSerializer(data=reserve_data)
-        if (reserve_serializer.is_valid(raise_exception=True)):
-            reserve_serializer.save()
-        return Response(reserve_serializer.data)
+        reserve_data['user'] = request.user.id
+        return Response(ReservesSerializer.createReserve(reserve_data))

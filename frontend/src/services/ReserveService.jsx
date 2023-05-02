@@ -9,6 +9,9 @@ const ReservesService = {
     },
     createReserve(date) {
         return http().post(`/api/ureserves`, date)
+    },
+    getReservesByUser() {
+        return http().get(`/api/ureserves`)
     }
 }
 export default ReservesService

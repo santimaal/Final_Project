@@ -25,7 +25,7 @@ export default function UserAdminProfile() {
 
     return (
         <>
-        <h1>holaaa</h1>
+        <h1>admin</h1>
             {/* <div className="">
                 <table className="text-center table table-striped mb-0 table-dark">
                     <thead className="bord_thead">

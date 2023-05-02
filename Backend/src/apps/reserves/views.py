@@ -27,7 +27,6 @@ class ReserveView(viewsets.GenericViewSet):
         day = request.data.get('day', None)
         return JsonResponse(ReservesSerializer.getReservesByField(id, day=day), safe=False)
 
-
 class OnlyUser(viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
 
@@ -35,3 +34,6 @@ class OnlyUser(viewsets.GenericViewSet):
         reserve_data = request.data
         reserve_data['user'] = request.user.id
         return Response(ReservesSerializer.createReserve(reserve_data))
+
+    def getReservesByUser(self, request):
+        return JsonResponse(ReservesSerializer.getReservesByUser(request.user.id), safe=False)

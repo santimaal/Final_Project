@@ -60,3 +60,11 @@ class ReservesSerializer(serializers.ModelSerializer):
         if reserve_serializer.is_valid(raise_exception=True):
             reserve_serializer.save()
             return reserve_serializer.data
+
+    def getReservesByUser(user):
+        Reserves = Reserve.objects.filter(user=user)
+        serialized = []
+        for reserve in Reserves.iterator():
+            Reserves = ReservesSerializer.to_reserves(reserve)
+            serialized.append(Reserves)
+        return serialized

@@ -7,6 +7,16 @@ import { toast } from 'react-toastify';
 export function useReserve() {
     const [reserves, setReserves] = useState([])
 
+    const getReserves = useCallback(async (id, date) => {
+        let rtrn = []
+        await ReserveService.getReserves(id, date)
+            .then(({ data }) => {
+                setReserves(data);
+                rtrn = data
+            })
+        return rtrn
+    }, [setReserves]);
+
     const getReservesByField = useCallback(async (id, date) => {
         let rtrn = []
         await ReserveService.getReservesByField(id, date)
@@ -37,5 +47,16 @@ export function useReserve() {
             })
     }, [])
 
-    return { getReservesByField, reserves, setReserves, createReserve, getReservesByUser }
+    const updateReserve = useCallback(async (data) => {
+        await ReserveService.updateReserve(data)
+            .then(({ data }) => {
+                console.log(data)
+            }).catch((err) => {
+                console.log(err.response.data)
+            })
+    }, [])
+
+
+
+    return { getReservesByField, reserves, setReserves, createReserve, getReservesByUser, getReserves, updateReserve }
 }

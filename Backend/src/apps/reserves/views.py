@@ -14,18 +14,12 @@ from src.apps.reserves.models import Reserve
 from src.apps.reserves.serializers import ReservesSerializer
 from rest_framework.views import APIView
 
-# Create your views here.
-
-
 class ReserveView(viewsets.GenericViewSet):
-
-    # not finished
-    def getReserves(self, request):
-        return JsonResponse(ReservesSerializer.getReserves(), safe=False)
 
     def getReservesByField(self, request, id):
         day = request.data.get('day', None)
         return JsonResponse(ReservesSerializer.getReservesByField(id, day=day), safe=False)
+
 
 class OnlyUser(viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
@@ -37,3 +31,13 @@ class OnlyUser(viewsets.GenericViewSet):
 
     def getReservesByUser(self, request):
         return JsonResponse(ReservesSerializer.getReservesByUser(request.user.id), safe=False)
+
+
+class OnlyAdmin(viewsets.GenericViewSet):
+    permission_classes = [IsAuthenticated, IsAdmin]
+
+    def getReserves(self, request):
+        return JsonResponse(ReservesSerializer.getReserves(), safe=False)
+    
+    def updateReserves(self, request):
+        return Response(ReservesSerializer.updateReserves(request.data))

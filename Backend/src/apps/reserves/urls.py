@@ -1,9 +1,9 @@
 from django.urls import path
-from src.apps.reserves.views import ReserveView, OnlyUser
+from src.apps.reserves.views import ReserveView, OnlyUser, OnlyAdmin
 
 urlpatterns = [
-    path('reserves', ReserveView.as_view(
-        {'get': 'getReserves'})),
+    path('areserves', OnlyAdmin.as_view(
+        {'get': 'getReserves', 'put': 'updateReserves'})),
     path('ureserves', OnlyUser.as_view(
         {'get': 'getReservesByUser', 'post': 'createReserve'})),
     path('reserves/<int:id>',

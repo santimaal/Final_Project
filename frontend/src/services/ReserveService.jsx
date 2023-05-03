@@ -2,7 +2,11 @@ import http from "./http"
 
 const ReservesService = {
     getReserves() {
-        return http().get("/api/reserves")
+        return http().get("/api/areserves")
+    },
+    updateReserve(data) {
+        console.log(data)
+        return http().put(`/api/areserves`, data)
     },
     getReservesByField(id, date) {
         return http().get(`/api/reserves/${id}`, { "date": date })

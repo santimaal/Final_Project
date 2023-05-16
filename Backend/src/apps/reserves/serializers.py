@@ -32,7 +32,7 @@ class ReservesSerializer(serializers.ModelSerializer):
             serialized.append(Reserves)
         return serialized
 
-    def getReservesByField(id, day=None):
+    def getReservesByFieldAndDay(id, day=None):
         if day is None:
             day = datetime.today()
         else:
@@ -76,7 +76,7 @@ class ReservesSerializer(serializers.ModelSerializer):
         #     reserve = Reserve.objects.get(id=request.get('id'))
         # except Reserve.DoesNotExist:
         #     raise serializers.ValidationError('Reserve not found')
-        
+
         # serializer = ReservesSerializer(
         #     instance=reserve, data=request, partial=True)
         # if serializer.is_valid():

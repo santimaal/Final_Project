@@ -5,7 +5,6 @@ const ReservesService = {
         return http().get("/api/areserves")
     },
     updateReserve(data) {
-        console.log(data)
         return http().put(`/api/areserves`, data)
     },
     getReservesByField(id, date) {

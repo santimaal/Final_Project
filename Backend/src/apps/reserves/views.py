@@ -16,9 +16,9 @@ from rest_framework.views import APIView
 
 class ReserveView(viewsets.GenericViewSet):
 
-    def getReservesByField(self, request, id):
+    def getReservesByFieldAndDay(self, request, id):
         day = request.data.get('day', None)
-        return JsonResponse(ReservesSerializer.getReservesByField(id, day=day), safe=False)
+        return JsonResponse(ReservesSerializer.getReservesByFieldAndDay(id, day=day), safe=False)
 
 
 class OnlyUser(viewsets.GenericViewSet):

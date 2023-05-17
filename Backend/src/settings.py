@@ -80,8 +80,8 @@ DATABASES = {
         'NAME': env('DB_MYSQL'),
         'USER': env('USER'),
         'PASSWORD': env('PASSWORD'),
-        'HOST': 'mynetwork',
-        'PORT': '3307',
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
 

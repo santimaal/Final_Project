@@ -14,8 +14,8 @@ sports_img= ["https://okdiario.com/img/2019/08/10/origen-del-futbol.jpg", "https
 # Const Users
 users_first_name = ['Client', 'Admin', 'Santi']
 users_last_name = ['', '', 'Martinez Albert']
-users_email = ['client@gmail.com', 'admin@gmail.com', 'santi@gmail.com']
-users_password_one = ['santi', 'santi', 'santi', 'santi']
+users_email = ['client@gmail.com', 'admin@gmail.com', 'santi@gmail.com', 'testing@sporty.com']
+users_password_one = ['santi', 'santi', 'santi', 'santi', 'asdf']
 users_type = ['client', 'admin', 'client']
 users_avatar = ['https://i.postimg.cc/T3g6d9nk/image.png', 'https://i.postimg.cc/TYGdKBYz/admin.png', 'https://i.postimg.cc/4Nc0VCjD/image.jpg']
 

@@ -7,8 +7,11 @@ WORKDIR /app/backend
 # Copia los archivos necesarios para el backend
 COPY . .
 
-RUN apk update && \
-    apk add --no-cache npm nodejs
+EXPOSE 3001
 
-# Instala las dependencias
+RUN pip install virtualenv
+RUN virtualenv . --python=python3
+RUN source ./bin/activate
 RUN pip install -r requirements.txt
+
+# RUN python manage.py makemigrations && python manage.py migrate

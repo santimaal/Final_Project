@@ -12,7 +12,7 @@ class ReservesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reserve
         fields = '__all__'
-        Reserves = ('id', 'date_ini', 'date_fin', 'field', 'user')
+        Reserves = ('id', 'date_ini', 'date_fin', 'field', 'user', 'status')
 
     def to_reserves(instance):
         return {
@@ -21,6 +21,7 @@ class ReservesSerializer(serializers.ModelSerializer):
             'user': instance.user.id,
             'date_ini': instance.date_ini,
             'date_fin': instance.date_fin,
+            'status': instance.status
         }
 
     def getReserves():
@@ -31,7 +32,7 @@ class ReservesSerializer(serializers.ModelSerializer):
             serialized.append(Reserves)
         return serialized
 
-    def getReservesByField(id, day=None):
+    def getReservesByFieldAndDay(id, day=None):
         if day is None:
             day = datetime.today()
         else:
@@ -60,3 +61,26 @@ class ReservesSerializer(serializers.ModelSerializer):
         if reserve_serializer.is_valid(raise_exception=True):
             reserve_serializer.save()
             return reserve_serializer.data
+
+    def getReservesByUser(user):
+        Reserves = Reserve.objects.filter(user=user)
+        serialized = []
+        for reserve in Reserves.iterator():
+            Reserves = ReservesSerializer.to_reserves(reserve)
+            serialized.append(Reserves)
+        return serialized
+
+    def updateReserves(request):
+        return Reserve.objects.filter(id=request.get('id')).update(status=request.get('status'))
+        # try:
+        #     reserve = Reserve.objects.get(id=request.get('id'))
+        # except Reserve.DoesNotExist:
+        #     raise serializers.ValidationError('Reserve not found')
+
+        # serializer = ReservesSerializer(
+        #     instance=reserve, data=request, partial=True)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return serializer.data
+        # else:
+        #     raise serializers.ValidationError('Bad request')

@@ -15,7 +15,7 @@ export default function Header() {
     const [location, setLocation] = useState(alocation.pathname.replace('/', ''))
     const { user, isAdmin } = useContext(AuthContextProvider)
     const links = ["HOME", "RESERVE"]
-    user ? isAdmin ? links.push("STATION", "SLOT", "BIKE", "USER", "LOGOUT") : links.push("LOGOUT") : links.push("SIGNIN", "SIGNUP");
+    user ? isAdmin ? links.push("USER", "LOGOUT") : links.push("LOGOUT") : links.push("SIGNIN", "SIGNUP");
     const { logout } = useAuth()
     const [show, setShow] = useState(false)
 
@@ -39,7 +39,7 @@ export default function Header() {
                     {user && (
                         <>
                             {/* <Notifications /> */}
-                            <Link to="profile"><img className="profile-img" src={user.avatar ? user.avatar : 'https://i.postimg.cc/T3g6d9nk/image.png'} alt="Avatar user" /></Link>
+                            <Link to="profile" onClick={(e) => changeHd('profile')}><img className="profile-img" src={user.avatar ? user.avatar : 'https://i.postimg.cc/T3g6d9nk/image.png'} alt="Avatar user" /></Link>
                         </>
                     )}
                 </div>

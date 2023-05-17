@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import UpdateUser from "../../components/User/UpdateUser";
 import UserAdminProfile from '../../components/User/UserAdminProfile';
+import UserReserveProfile from '../../components/User/UserReserveProfile';
 import AuthContextProvider from '../../context/AuthContext';
 // import Incident from "../../components/Incident/Incident";
 
@@ -27,8 +28,7 @@ export default function Profile() {
                       <UserAdminProfile />
                     )}
                     {!isAdmin && (
-                      <h1>hola</h1>
-                      // <UserRentProfile />
+                      <UserReserveProfile />
                     )}
                 </div>
               </div>

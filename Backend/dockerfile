@@ -11,7 +11,5 @@ EXPOSE 3001
 
 RUN pip install virtualenv
 RUN virtualenv . --python=python3
-RUN source ./bin/activate
-RUN pip install -r requirements.txt
+RUN pip install django django-cors-headers
 
-# RUN python manage.py makemigrations && python manage.py migrate

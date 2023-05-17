@@ -12,4 +12,3 @@ EXPOSE 3001
 RUN pip install virtualenv
 RUN virtualenv . --python=python3
 RUN pip install django django-cors-headers
-

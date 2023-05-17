@@ -7,7 +7,7 @@ export default function FieldsCard({ field }) {
     return (
         <>
             <div className="card-list" data-bs-toggle="modal" data-backdrop="static" data-bs-target={`#exampleModal${field.slug}`}>
-                <article className="card">
+                <article className="card card-article">
                     <figure className="card-image">
                         <img src={field.img} alt="An orange painted blue, cut in half laying on a blue background" />
                     </figure>

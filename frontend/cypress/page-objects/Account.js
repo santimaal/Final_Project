@@ -1,7 +1,5 @@
 class Account {
     Login() {
-        // cy.session(
-        // () => {
         cy.visit('http://localhost:3000/signin');
         cy.get("[type='text']").type("testing@sporty.com")
         cy.get("[type='password']").type("asdf")
@@ -9,7 +7,6 @@ class Account {
         cy.get("[type='submit']").click();
         cy.wait('@register')
         cy.get("[class*='error']").should('not.exist')
-        // })
     }
 
     Register() {
@@ -23,6 +20,7 @@ class Account {
         cy.get("[type='submit']").click();
         cy.wait('@register')
         cy.get("[class*='error']").should('not.exist')
+        cy.get(".header-profile").should('be.visible')
     }
 }
 

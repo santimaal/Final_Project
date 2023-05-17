@@ -71,7 +71,7 @@ export default function ReserveModal({ data = null }) {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body flex justify-around">
-                        <input type="date" name="" id="" className='text-center' value={new Date().toISOString().split('T')[0]} min={new Date().toISOString().slice(0, 10)} onChange={(e) => generateTimeOptions(e.target.value)}  {...register("fechavalue", { required: true })} />
+                        <input type="date" name="" id="" className='text-center' defaultValue={new Date().toISOString().split('T')[0]} min={new Date().toISOString().slice(0, 10)} onChange={(e) => generateTimeOptions(e.target.value)}  {...register("fechavalue", { required: true })} />
                         <select id="time" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value == 'hour' ? null : e.target.value)}>
                             <option value="hour" hidden>Hour</option>
                             {
@@ -94,7 +94,7 @@ export default function ReserveModal({ data = null }) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={reserve}>Reserve Now!</button>
+                        <button type="button" id="modal-reserve-btn" data-bs-dismiss="modal" className="btn btn-primary" onClick={reserve}>Reserve Now!</button>
                     </div>
                 </div>
             </div>

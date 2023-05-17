@@ -1,16 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useState } from "react"
+import AuthContextProvider from '../../context/AuthContext';
 import ReserveModal from "../Reserve/ReserveModal"
+import { useNavigate } from "react-router-dom";
 import "./Fields.scss"
-import AuthContextProvider from "../../context/AuthContext"
-import { useNavigate } from "react-router-dom"
 
 export default function FieldsCard({ field }) {
     const navigate = useNavigate();
     const { user } = useContext(AuthContextProvider)
     return (
         <>
-            <div className="card-list" data-bs-toggle="modal" data-backdrop="static" data-bs-target={`#exampleModal${field.slug}`} onClick={(e) => user ? console.log(user) : navigate('signin')}>
+            <div className="card-list" {...(user && { 'data-bs-toggle': 'modal', 'data-backdrop': 'static', 'data-bs-target': `#exampleModal${field.slug}`, })}
+                onClick={(e) => user ?? navigate('/signup')}>
                 <article className="card card-article">
                     <figure className="card-image">
                         <img src={field.img} alt="An orange painted blue, cut in half laying on a blue background" />
@@ -35,7 +36,9 @@ export default function FieldsCard({ field }) {
                     </div>
                 </article>
             </div>
-            <ReserveModal data={field} />
+            {user && (
+                <ReserveModal data={field} />
+            )}
         </>
     )
 }

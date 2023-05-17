@@ -12,12 +12,12 @@ sports_name= ["Football", "Tennis", "Basketball", "Padel", "Futsal"]
 sports_img= ["https://okdiario.com/img/2019/08/10/origen-del-futbol.jpg", "https://images7.alphacoders.com/734/thumb-1920-734192.jpg", "https://www.xtrafondos.com/descargar.php?id=1775&resolucion=2560x1600", "https://padelstar.es/wp-content/uploads/2022/05/que-material-elegir-para-jugar-al-padel.jpg", "https://www.costablancafutsalcup.com/Portals/7/EasyGalleryImages/8/240/8.jpg"]
 
 # Const Users
-users_first_name = ['Client', 'Admin', 'Santi']
-users_last_name = ['', '', 'Martinez Albert']
-users_email = ['client@gmail.com', 'admin@gmail.com', 'santi@gmail.com']
-users_password_one = ['santi', 'santi', 'santi', 'santi']
-users_type = ['client', 'admin', 'client']
-users_avatar = ['https://i.postimg.cc/T3g6d9nk/image.png', 'https://i.postimg.cc/TYGdKBYz/admin.png', 'https://i.postimg.cc/4Nc0VCjD/image.jpg']
+users_first_name = ['Client', 'Admin', 'Santi', 'Sporty']
+users_last_name = ['', '', 'Martinez Albert', 'Testing']
+users_email = ['client@gmail.com', 'admin@gmail.com', 'santi@gmail.com', 'testing@sporty.com']
+users_password_one = ['santi', 'santi', 'santi', 'santi', 'asdf']
+users_type = ['client', 'admin', 'client', 'client']
+users_avatar = ['https://i.postimg.cc/T3g6d9nk/image.png', 'https://i.postimg.cc/TYGdKBYz/admin.png', 'https://i.postimg.cc/4Nc0VCjD/image.jpg', 'https://i.postimg.cc/4Nc0VCjD/image.jpg']
 
 
 def create_sports(n_sports, n_fields):

@@ -19,7 +19,13 @@ services:
       - "3001:3001"
     depends_on:
       - db
-    command: sh -c "source ./bin/activate && pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate && pipenv run python dummies.py && python manage.py runserver 0.0.0.0:3001"
+    command: |
+      sh -c "source ./bin/activate && \
+      pip install -r requirements.txt && \
+      python manage.py makemigrations && \
+      python manage.py migrate && \
+      pipenv run python dummies.py && \
+      python manage.py runserver 0.0.0.0:3001"
     networks:
       - mynetwork
 

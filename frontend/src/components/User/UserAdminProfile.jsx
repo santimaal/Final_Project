@@ -30,6 +30,7 @@ export default function UserAdminProfile() {
                 <table className="text-center table table-striped mb-0 table-dark">
                     <thead className="bord_thead">
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">User</th>
                             <th scope="col">Field</th>
                             <th scope="col">Date</th>
@@ -40,6 +41,7 @@ export default function UserAdminProfile() {
                         {reserves.map((reserve, id) => {
                             return (
                                 <tr key={id}>
+                                    <td>{reserve.id}</td>
                                     <td>{reserve.user}</td>
                                     <td>{reserve.field}</td>
                                     <td>{new Date(new Date(reserve.date_ini).getTime() - (2 * 60 * 60 * 1000)).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '')}</td>

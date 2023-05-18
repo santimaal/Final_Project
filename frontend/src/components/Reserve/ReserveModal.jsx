@@ -15,7 +15,6 @@ export default function ReserveModal({ data = null }) {
 
     const generateTimeOptions = async (date = new Date().toISOString().slice(0, 10)) => {
         let reserves = await getReservesByField(data.id, date);
-        // console.log(reserves);
         const timeOptions = [];
         for (let hour = 8; hour < 21; hour++) {
             for (let minute = 0; minute < 60; minute += 30) {

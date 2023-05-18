@@ -12,7 +12,7 @@ describe('reserve', () => {
   it('No User Logged', () => {
     cy.visit('http://localhost:3000/reserve')
     cy.get(".card-list").first().should('be.visible').click()
-    cy.url().should('include', '/signup')
+    cy.url().should('include', '/signin')
   })
 
   it('User Logged', () => {

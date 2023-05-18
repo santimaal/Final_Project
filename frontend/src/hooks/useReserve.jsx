@@ -21,7 +21,6 @@ export function useReserve() {
         let rtrn = []
         await ReserveService.getReservesByField(id, date)
             .then(({ data }) => {
-                console.log(data);
                 setReserves(data);
                 rtrn = data
             })
@@ -32,7 +31,6 @@ export function useReserve() {
         await ReserveService.createReserve(data)
             .then(({ data }) => {
                 toast.success('Reserve added successfully at ' + new Date(data.date_ini).toUTCString())
-                console.log(data)
             }).catch((err) => {
                 toast.error(err.response.data[0])
             })
@@ -41,17 +39,18 @@ export function useReserve() {
     const getReservesByUser = useCallback(async (data) => {
         await ReserveService.getReservesByUser(data)
             .then(({ data }) => {
-                console.log(data)
                 setReserves(data)
             }).catch((err) => {
                 toast.error(err.response.data)
             })
     }, [])
 
-    const updateReserve = useCallback(async (data) => {
-        await ReserveService.updateReserve(data)
+    const updateReserve = useCallback(async (reserve) => {
+        console.log(reserve)
+        await ReserveService.updateReserve(reserve)
             .then(({ data }) => {
                 console.log(data)
+                toast.success("Successfully updated id: "+ reserve.id)
             }).catch((err) => {
                 console.log(err.response.data)
             })

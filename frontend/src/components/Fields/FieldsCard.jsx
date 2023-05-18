@@ -10,8 +10,8 @@ export default function FieldsCard({ field }) {
     const { user } = useContext(AuthContextProvider)
     return (
         <>
-            <div className="card-list" {...(user && { 'data-bs-toggle': 'modal', 'data-backdrop': 'static', 'data-bs-target': `#exampleModal${field.slug}`, })}
-                onClick={(e) => user ?? navigate('/signup')}>
+            <div className="card-list" {...(user && user.is_active && { 'data-bs-toggle': 'modal', 'data-backdrop': 'static', 'data-bs-target': `#exampleModal${field.slug}`, })}
+                onClick={(e) => user ?? navigate('/signin')}>
                 <article className="card card-article">
                     <figure className="card-image">
                         <img src={field.img} alt="An orange painted blue, cut in half laying on a blue background" />
@@ -36,7 +36,7 @@ export default function FieldsCard({ field }) {
                     </div>
                 </article>
             </div>
-            {user && (
+            {user && user.is_active && (
                 <ReserveModal data={field} />
             )}
         </>

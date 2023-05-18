@@ -8,7 +8,7 @@ const ReservesService = {
         return http().put(`/api/areserves`, data)
     },
     getReservesByField(id, date) {
-        return http().get(`/api/reserves/${id}`, { "date": date })
+        return http().post(`/api/reserves/${id}`, { "day": date })
     },
     createReserve(date) {
         return http().post(`/api/ureserves`, date)

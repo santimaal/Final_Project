@@ -12,7 +12,7 @@ export default function UserReserveProfile() {
     return (
         <>
             <div className="">
-                <table className="text-center table table-striped mb-0 table-dark">
+                <table id="reserve-table" className="text-center table table-striped mb-0 table-dark">
                     <thead className="bord_thead">
                         <tr>
                             <th scope="col">Date</th>

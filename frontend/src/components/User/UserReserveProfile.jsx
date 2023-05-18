@@ -12,7 +12,7 @@ export default function UserReserveProfile() {
     return (
         <>
             <div className="">
-                <table className="text-center table table-striped mb-0 table-dark">
+                <table id="reserve-table" className="text-center table table-striped mb-0 table-dark">
                     <thead className="bord_thead">
                         <tr>
                             <th scope="col">Date</th>
@@ -25,7 +25,7 @@ export default function UserReserveProfile() {
                         {reserves && reserves.length > 0 ? (
                             reserves.map((reserve) => {
                                 return (
-                                    <tr key={reserve.id}>
+                                    <tr key={reserve.id} className="reserve-line">
                                         <td>{new Date(new Date(reserve.date_ini).getTime() - (2 * 60 * 60 * 1000)).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '')}</td>
                                         <td>{new Date(new Date(reserve.date_fin) - new Date(reserve.date_ini)).getMinutes()}</td>
                                         <td>{reserve.field}</td>

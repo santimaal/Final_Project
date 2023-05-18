@@ -21,6 +21,7 @@ export function useReserve() {
         let rtrn = []
         await ReserveService.getReservesByField(id, date)
             .then(({ data }) => {
+                console.log(data);
                 setReserves(data);
                 rtrn = data
             })

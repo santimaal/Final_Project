@@ -15,6 +15,7 @@ export default function ReserveModal({ data = null }) {
 
     const generateTimeOptions = async (date = new Date().toISOString().slice(0, 10)) => {
         let reserves = await getReservesByField(data.id, date);
+        // console.log(reserves);
         const timeOptions = [];
         for (let hour = 8; hour < 21; hour++) {
             for (let minute = 0; minute < 60; minute += 30) {
@@ -71,7 +72,19 @@ export default function ReserveModal({ data = null }) {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body flex justify-around">
-                        <input type="date" name="" id="" className='text-center' value={new Date().toISOString().split('T')[0]} min={new Date().toISOString().slice(0, 10)} onChange={(e) => generateTimeOptions(e.target.value)}  {...register("fechavalue", { required: true })} />
+                        {/* <input type="date" name="" id="" className='text-center' defaultValue={new Date().toISOString().split('T')[0]} min={new Date().toISOString().slice(0, 10)} onChange={(e) => generateTimeOptions(e.target.value)}  {...register("fechavalue", { required: true })} /> */}
+
+                        <input
+                            type="date"
+                            name="fechavalue"
+                            id="fechavalue"
+                            className="text-center"
+                            defaultValue={new Date().toISOString().split('T')[0]}
+                            min={new Date().toISOString().slice(0, 10)}
+                            {...register('fechavalue', { required: true })}
+                            onChange={(e)=> generateTimeOptions(e.target.value)}
+                        />
+
                         <select id="time" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value == 'hour' ? null : e.target.value)}>
                             <option value="hour" hidden>Hour</option>
                             {
@@ -94,7 +107,7 @@ export default function ReserveModal({ data = null }) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={reserve}>Reserve Now!</button>
+                        <button type="button" id="modal-reserve-btn" data-bs-dismiss="modal" className="btn btn-primary" onClick={reserve}>Reserve Now!</button>
                     </div>
                 </div>
             </div>

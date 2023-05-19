@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'src.apps.fields',
     'src.apps.reserves',
     'src.apps.notifications',
-    'src.apps.telegram',
+    # 'src.apps.telegram',
     'corsheaders',
 ]
 
@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': env('DB_MYSQL'),
         'USER': env('USER'),
         'PASSWORD': env('PASSWORD'),
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '3306',
     }
 }

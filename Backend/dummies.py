@@ -6,6 +6,7 @@ from src.apps.sports.serializers import SportsSerializer
 from src.apps.fields.serializers import FieldsSerializer
 from src.apps.user.serializers import UserSerializer, ProfileSerializer
 from src.apps.user.models import User
+from src.apps.sports.models import Sport
 
 # Const Sports
 sports_name= ["Football", "Tennis", "Basketball", "Padel", "Futsal"]
@@ -28,30 +29,45 @@ def create_sports(n_sports, n_fields):
         }
         serializer_sport = SportsSerializer(data=sport)
         if serializer_sport.is_valid(raise_exception=True):
-            current_sport = serializer_sport.save()
-        for j in range(n_fields):
-            field_serializer = FieldsSerializer(data={'sport':current_sport.id})
-            field_serializer = FieldsSerializer(data={'img':current_sport.img})
-            if (field_serializer.is_valid(raise_exception=True)):
-                field_serializer.save()
+            existing_sport = Sport.objects.filter(name=sports_name[i]).exists()
+            if not existing_sport:
+                current_sport = serializer_sport.save()
+                for j in range(n_fields):
+                    field_data = {
+                        'sport': current_sport.id,
+                        'img': current_sport.img
+                    }
+                    field_serializer = FieldsSerializer(data=field_data)
+                    if field_serializer.is_valid(raise_exception=True):
+                        field_serializer.save()
 
 
 def create_users():
-    for i in range( len(users_first_name)):
-        user = {
-            'first_name' : users_first_name[i],
-            'last_name' : users_last_name[i],
-            'email' : users_email[i],
-            'password' : users_password_one[i],
-            'type' : users_type[i]
-        }
-        user_serializer = UserSerializer(data=user)
-        if (user_serializer.is_valid(raise_exception=True)):
-           user_ok = User.objects.create_user(users_first_name[i], users_last_name[i], users_email[i], users_password_one[i], users_type[i])
-           if user_ok:
-            profile_serializer = ProfileSerializer(data={'user': user_ok.id, 'avatar': users_avatar[i]})
-            if (profile_serializer.is_valid(raise_exception=True)):
-                profile_serializer.save()
+    for i in range(len(users_first_name)):
+        email = users_email[i]
+        existing_user = User.objects.filter(email=email).exists()
+
+        if not existing_user:
+            user = {
+                'first_name': users_first_name[i],
+                'last_name': users_last_name[i],
+                'email': email,
+                'password': users_password_one[i],
+                'type': users_type[i]
+            }
+            user_serializer = UserSerializer(data=user)
+            if user_serializer.is_valid(raise_exception=True):
+                user_ok = User.objects.create_user(
+                    users_first_name[i],
+                    users_last_name[i],
+                    email,
+                    users_password_one[i],
+                    users_type[i]
+                )
+                if user_ok:
+                    profile_serializer = ProfileSerializer(data={'user': user_ok.id, 'avatar': users_avatar[i]})
+                    if profile_serializer.is_valid(raise_exception=True):
+                        profile_serializer.save()
 
 
 if __name__ == '__main__':

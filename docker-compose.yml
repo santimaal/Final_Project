@@ -2,28 +2,38 @@ version: '3'
 
 services:
   db:
+    container_name: sporty_db
     image: mysql:latest
     ports:
       - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: finalproject
     networks:
       - mynetwork
 
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "3001:3001"
-  #   depends_on:
-  #     - db
-  #   networks:
-  #     - mynetwork
+  backend:
+    restart: always
+    build: ./backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    command: |
+      sh -c "source ./bin/activate && \
+      pip install -r requirements.txt && \
+      python manage.py makemigrations && \
+      python manage.py migrate && \
+      pipenv run python dummies.py && \
+      python manage.py runserver 0.0.0.0:3001"
+    networks:
+      - mynetwork
 
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
-    command: npm run dev
+    command: npm start
     volumes:
       - ./frontend:/app
     networks:
@@ -32,12 +42,15 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
+    depends_on:
+      - db
     environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: yourpassword
+      PMA_PORT: 3306
+      PMA_HOST: sporty_db
+      MYSQL_ROOT_PASSWORD: root
     restart: always
     ports:
-      - "8080:80"
+      - "3002:80"
     networks:
       - mynetwork
 

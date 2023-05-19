@@ -1,0 +1,14 @@
+# Segunda etapa: construye el backend
+FROM python:3.9-alpine as backend
+
+# Establece el directorio de trabajo para el backend
+WORKDIR /app/backend
+
+# Copia los archivos necesarios para el backend
+COPY . .
+
+EXPOSE 3001
+
+RUN pip install virtualenv
+RUN virtualenv . --python=python3
+RUN pip install django django-cors-headers

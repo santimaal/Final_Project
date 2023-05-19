@@ -1,4 +1,4 @@
-import {useContext, useState, useCallback } from 'react'
+import { useContext, useState, useCallback } from 'react'
 import { useNavigate } from "react-router-dom"
 
 import AuthContextProvider from '../context/AuthContext';
@@ -34,7 +34,13 @@ export function useAuth() {
         setStatus({ loading: true });
         AuthService.loginUser(data)
             .then((res) => {
-                setUserLoged(res);
+                if (typeof res.data == "string") {
+                    toast.error("Email or password is not correct", {
+                        position: toast.POSITION.TOP_RIGHT,
+                    });
+                } else {
+                    setUserLoged(res);
+                }
             }).catch((error) => {
                 if (error.response.data == 'email or password not correct') {
                     toast.error("Email or password is not correct", {
@@ -120,27 +126,27 @@ export function useAuth() {
         }
     }, [user]);
 
-    const getUsers = useCallback(async() => {
+    const getUsers = useCallback(async () => {
         setStatus({ loading: true, error: false });
         await AuthService.getUsers()
-            .then(({data}) => {
+            .then(({ data }) => {
                 setStatus({ loading: false, error: false });
                 setUsers(data)
-            }); 
+            });
     }, []);
 
-    const changeStatus = useCallback(async(id)=> {
+    const changeStatus = useCallback(async (id) => {
         await AuthService.changeStatus(id)
-        .then(({data}) => {
-            setStatus({ loading: false, error: false });
-            toast.success(data.first_name + " has been updated successfully", {
-                position: toast.POSITION.TOP_RIGHT
+            .then(({ data }) => {
+                setStatus({ loading: false, error: false });
+                toast.success(data.first_name + " has been updated successfully", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                getUsers()
             });
-            getUsers()
-        }); 
-    },[])
+    }, [])
 
-    return { status, signup, signin, setUserLoged, logout, updateUser, resetNotis, loadUser, checkAdmin, setJWT, setUser, getUsers,users,setUsers, changeStatus }
+    return { status, signup, signin, setUserLoged, logout, updateUser, resetNotis, loadUser, checkAdmin, setJWT, setUser, getUsers, users, setUsers, changeStatus }
 }
 
 

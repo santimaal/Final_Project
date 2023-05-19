@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import UpdateUser from "../../components/User/UpdateUser";
 import UserAdminProfile from '../../components/User/UserAdminProfile';
+import UserReserveProfile from '../../components/User/UserReserveProfile';
 import AuthContextProvider from '../../context/AuthContext';
 // import Incident from "../../components/Incident/Incident";
 
@@ -27,22 +28,10 @@ export default function Profile() {
                       <UserAdminProfile />
                     )}
                     {!isAdmin && (
-                      <h1>hola</h1>
-                      // <UserRentProfile />
+                      <UserReserveProfile />
                     )}
                 </div>
               </div>
-            )}
-            {/* Incident */}
-            {user.opt_profile && (
-              <>
-                <div className="col-lg-8 h-[80vh]">
-                  <div className="card mb-4 bg-black ">
-                    {/* <Incident /> */}
-                    <h1>jefe</h1>
-                  </div>
-                </div>
-              </>
             )}
           </div>
         </div>

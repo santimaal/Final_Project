@@ -1,72 +1,65 @@
 import React, { useEffect, useState } from "react";
-// import { useIncident } from "../../hooks/useIncident";
+import { useReserve } from "../../hooks/useReserve";
 import "./User.scss";
 
 export default function UserAdminProfile() {
-    // const { incs, setInc, getAllInc, closeInc } = useIncident()
-    // const [message, setMessage] = useState({})
+    const { reserves, setReserves, getReserves, updateReserve } = useReserve();
 
-    // useEffect(() => {
-    //     getAllInc();
-    // }, [])
+    useEffect(() => {
+        getReserves()
+    }, [])
 
-    // const relaodInc = () => {
-    //     setInc(incs.filter((inc) => {
-    //         return inc.id !== message.id
-    //     }))
-    // }
 
-    // const close = async (rent) => {
-    //     console.log(rent);
-    //     console.log(getValues().slot);
-    //     await closeRent(rent.id, { "bike": rent.bike, "slot": getValues().slot })
-    //     getRentsByUser();
-    // }
+    const updateReserves = (id, status) => {
+        const updatedReserves = reserves.map(reserve => {
+            if (reserve.id === id) {
+                return {
+                    ...reserve,
+                    status: status
+                };
+            } else {
+                return reserve;
+            }
+        });
+        setReserves(updatedReserves)
+    }
 
     return (
         <>
-        <h1>holaaa</h1>
-            {/* <div className="">
+            <div className="">
                 <table className="text-center table table-striped mb-0 table-dark">
                     <thead className="bord_thead">
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">User</th>
-                            <th scope="col">Specify</th>
-                            <th scope="col">Desc</th>
+                            <th scope="col">Field</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Options</th>
                         </tr>
                     </thead>
                     <tbody className="align-baseline">
-                        {incs.map((inc, id) => {
+                        {reserves.map((reserve, id) => {
+                            let date = new Date(new Date(reserve.date_ini).getTime() - (2 * 60 * 60 * 1000)).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '')
                             return (
                                 <tr key={id}>
-                                    <td>{inc.user}</td>
-                                    <td>{inc.bike ? "bike " + inc.bike : inc.slot ? "slot " + inc.slot : "loc " + inc.location}</td>
-                                    <td>{inc.desc}</td>
-                                    <td><button onClick={(e) => setMessage({ ...message, id: inc.id, user: inc.user, type: inc.bike ? "bike" : inc.slot ? "slot" : "other" })} data-bs-toggle="modal" data-bs-target="#modal_inc">Response</button></td>
+                                    <td>{reserve.id}</td>
+                                    <td>{reserve.user}</td>
+                                    <td>{reserve.field}</td>
+                                    <td>{date}</td>
+                                    {reserve.status === 'pending' ? (
+                                        <td className="flex justify-center gap-x-2">
+                                            <button onClick={(e) => { updateReserve({ id: reserve.id, status: 'accepted', type: 'reserve', message: 'Reserve at ' + date + ' is accepted', user: reserve.user }); updateReserves(reserve.id, 'accepted') }} className="btn btn-outline-success flex rounded-full">✓</button>
+                                            <button onClick={(e) => { updateReserve({ id: reserve.id, status: 'denied', type: 'reserve', message: 'Reserve at ' + date + ' is denied', user: reserve.user }); updateReserves(reserve.id, 'denied') }} className="btn btn-outline-danger flex rounded-full">X</button>
+                                        </td>
+                                    ) :
+                                        <td>{reserve.status}</td>
+                                    }
                                 </tr>
                             )
                         })}
                     </tbody>
                 </table>
             </div>
-
-            <div className="modal fade" id="modal_inc" tabIndex="-1" aria-labelledby="modal_incLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="modal_incLabel">Close Incidence</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <input type="text" className="border" placeholder="message" onChange={(e) => setMessage({ ...message, message: e.target.value })} autoComplete="off" />
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => { closeInc(message); relaodInc() }}>Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </>
     );
 }

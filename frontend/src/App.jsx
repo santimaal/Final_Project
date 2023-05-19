@@ -36,7 +36,7 @@ const Home = React.lazy(() => import("./pages/Home/Home"))
 const Reserve = React.lazy(() => import("./pages/Reserve/Reserve"))
 // const Station = React.lazy(() => import("./pages/Station/Stations"))
 // const Slot = React.lazy(() => import("./pages/Slot/Slots"))
-// const UserList = React.lazy(() => import("./pages/User/List_Users_Admin"))
+const UserList = React.lazy(() => import("./pages/User/List_Users_Admin"))
 // const AddStation = React.lazy(() => import("./pages/Station/CreateStation"))
 // const Incident = React.lazy(() => import("./pages/Incident/Incident"))
 const Signin = React.lazy(() => import("./pages/SignIn/SignIn"))
@@ -56,14 +56,14 @@ function App() {
             <Route path="home" element={<Suspense fallback={<SpinnerLoading />}><Home /></Suspense>} />
             <Route path="reserve" element={<Suspense fallback={<SpinnerLoading />}><Reserve /></Suspense>} />
             {/* Dashoboards  Admin */}
-            {/* <Route element={<Suspense fallback={<SpinnerLoading />}><AdminGuard /></Suspense>}>
-              <Route path="bike" element={<Suspense fallback={<SpinnerLoading />}><Bikes /></Suspense>} />
+            <Route element={<Suspense fallback={<SpinnerLoading />}><AdminGuard /></Suspense>}>
+              {/* <Route path="bike" element={<Suspense fallback={<SpinnerLoading />}><Bikes /></Suspense>} />
               <Route path="addbike" element={<Suspense fallback={<SpinnerLoading />}><AddBike /></Suspense>} />
               <Route path="station" element={<Suspense fallback={<SpinnerLoading />}><Station /></Suspense>} />
               <Route path="addstation" element={<Suspense fallback={<SpinnerLoading />}><AddStation /></Suspense>} />
-              <Route path="slot" element={<Suspense fallback={<SpinnerLoading />}><Slot /></Suspense>} />
+              <Route path="slot" element={<Suspense fallback={<SpinnerLoading />}><Slot /></Suspense>} /> */}
               <Route path="user" element={<Suspense fallback={<SpinnerLoading />}><UserList /></Suspense>} />
-            </Route> */}
+            </Route>
             {/* Regsiter and Login */}
             <Route element={<NoAuthGuard />}>
               <Route path="signin" element={<Suspense fallback={<SpinnerLoading />}><Signin /></Suspense>} />

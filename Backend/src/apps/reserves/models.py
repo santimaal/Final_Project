@@ -11,6 +11,7 @@ class Reserve(TimestampedModel, models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE)
    date_ini = models.DateTimeField(editable=True, default=datetime.datetime.now)
    date_fin = models.DateTimeField(editable=True, default=datetime.datetime.now)
+   status = models.CharField(blank=True, max_length=100, default='pending')
 
    class Meta:
        verbose_name = 'reserve'

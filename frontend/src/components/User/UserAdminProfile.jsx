@@ -39,16 +39,17 @@ export default function UserAdminProfile() {
                     </thead>
                     <tbody className="align-baseline">
                         {reserves.map((reserve, id) => {
+                            let date = new Date(new Date(reserve.date_ini).getTime() - (2 * 60 * 60 * 1000)).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '')
                             return (
                                 <tr key={id}>
                                     <td>{reserve.id}</td>
                                     <td>{reserve.user}</td>
                                     <td>{reserve.field}</td>
-                                    <td>{new Date(new Date(reserve.date_ini).getTime() - (2 * 60 * 60 * 1000)).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '')}</td>
+                                    <td>{date}</td>
                                     {reserve.status === 'pending' ? (
                                         <td className="flex justify-center gap-x-2">
-                                            <button onClick={(e) => { updateReserve({ id: reserve.id, status: 'accepted' }); updateReserves(reserve.id, 'accepted') }} className="btn btn-outline-success flex rounded-full">✓</button>
-                                            <button onClick={(e) => { updateReserve({ id: reserve.id, status: 'denied' }); updateReserves(reserve.id, 'denied') }} className="btn btn-outline-danger flex rounded-full">X</button>
+                                            <button onClick={(e) => { updateReserve({ id: reserve.id, status: 'accepted', type: 'reserve', message: 'Reserve at ' + date + ' is accepted', user: reserve.user }); updateReserves(reserve.id, 'accepted') }} className="btn btn-outline-success flex rounded-full">✓</button>
+                                            <button onClick={(e) => { updateReserve({ id: reserve.id, status: 'denied', type: 'reserve', message: 'Reserve at ' + date + ' is denied', user: reserve.user }); updateReserves(reserve.id, 'denied') }} className="btn btn-outline-danger flex rounded-full">X</button>
                                         </td>
                                     ) :
                                         <td>{reserve.status}</td>

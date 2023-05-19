@@ -40,4 +40,9 @@ class OnlyAdmin(viewsets.GenericViewSet):
         return JsonResponse(ReservesSerializer.getReserves(), safe=False)
     
     def updateReserves(self, request):
-        return Response(ReservesSerializer.updateReserves(request.data))
+        context = {
+            'desc': request.data['message'],
+            'type': request.data['type'],
+            'user': request.data['user']
+        }
+        return Response(ReservesSerializer.updateReserves(request.data, context))

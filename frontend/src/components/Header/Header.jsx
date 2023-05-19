@@ -4,14 +4,14 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import AuthContextProvider from "../../context/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
-// import Notifications from "../Notifications/Notifications";
-// import Announce from "../Notifications/Announce";
+import Notifications from "../Notifications/Notifications";
+import Announce from "../Notifications/Announce";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Header() {
 
     const alocation = useLocation()
-    const [hClass, sethClass] = useState(alocation.pathname.replace('/', '') == 'home' || alocation.pathname == '/' ? 'header fixed z-10 bg-black' : 'header')
+    const [hClass, sethClass] = useState(alocation.pathname.replace('/', '') == 'home' || alocation.pathname == '/' ? 'header hd:fixed z-10 bg-black' : 'header')
     const [location, setLocation] = useState(alocation.pathname.replace('/', ''))
     const { user, isAdmin } = useContext(AuthContextProvider)
     const links = ["HOME", "RESERVE"]
@@ -28,25 +28,25 @@ export default function Header() {
     })
 
     const changeHd = (item) => {
-        sethClass(item.toLowerCase() == 'home' || item == '/' ? 'header fixed z-10 bg-black' : 'header')
+        sethClass(item.toLowerCase() == 'home' || item == '/' ? 'header hd:fixed z-10 bg-black' : 'header')
     }
 
     return (
         <>
             <div className={hClass} id="header">
-                <div className="logo"><Link to="home"><img src="/assets/logos/graygreenwheels.png" alt="Sporty" width="200vh" /></Link></div>
+                <div className="logo"><Link to="home"><img src="/assets/sporty.png" alt="Sporty" width="200vh" /></Link></div>
                 <div className="header-profile">
                     {user && (
                         <>
-                            {/* <Notifications /> */}
+                            <Notifications />
                             <Link to="profile" onClick={(e) => changeHd('profile')}><img className="profile-img" src={user.avatar ? user.avatar : 'https://i.postimg.cc/T3g6d9nk/image.png'} alt="Avatar user" /></Link>
                         </>
                     )}
                 </div>
                 <div className="header-menu">
-                    {/* {isAdmin && (
+                    {isAdmin && (
                         <Announce />
-                    )} */}
+                    )}
                     {print}
                     <div className="hd:hidden text-white">
                         <FontAwesomeIcon icon="fa-solid fa-bars" className="text-2xl" onClick={() => setShow(!show)} />

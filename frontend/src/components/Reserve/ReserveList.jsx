@@ -4,7 +4,7 @@ import FieldsCard from "../Fields/FieldsCard"
 
 export default function ReserveListComponent() {
     const { fields } = useFields()
-    const [field, setField] = useState({slug :'test', pfh:2,sport:'test'})
+    const [field, setField] = useState({ slug: 'test', pfh: 2, sport: 'test' })
 
     return (
         <>

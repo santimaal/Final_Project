@@ -7,5 +7,5 @@ urlpatterns = [
     path('ureserves', OnlyUser.as_view(
         {'get': 'getReservesByUser', 'post': 'createReserve'})),
     path('reserves/<int:id>',
-         ReserveView.as_view({'get': 'getReservesByFieldAndDay'})),
+         ReserveView.as_view({'post': 'getReservesByFieldAndDay'})),
 ]

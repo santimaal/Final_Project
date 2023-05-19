@@ -7,11 +7,9 @@ import { toast } from 'react-toastify';
 export default function ReserveModal({ data = null }) {
     const [selectedTime, setSelectedTime] = useState('hour');
     const [hAvlable, sethAvlable] = useState([]);
-    const { reserves, setReserves, getReservesByField, createReserve } = useReserve()
+    const { getReservesByField, createReserve } = useReserve()
     const [datevalue, setDatevalue] = useState(new Date().toISOString())
     const { register, handleSubmit, formState: { errors }, getValues } = useForm()
-
-    let timeToCompare = new Date(`2000-01-01T${selectedTime}:00.000Z`);
 
     const generateTimeOptions = async (date = new Date().toISOString().slice(0, 10)) => {
         let reserves = await getReservesByField(data.id, date);
@@ -63,41 +61,70 @@ export default function ReserveModal({ data = null }) {
     }, []);
 
     return (
-        <div className="modal fade" id={`exampleModal${data.slug}`} tabIndex="-1" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id={`exampleModal${data.slug}`} tabIndex="-1"
+            data-backdrop="static"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">{data.slug}</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" className="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body flex justify-around">
-                        <input type="date" name="" id="" className='text-center' value={new Date().toISOString().split('T')[0]} min={new Date().toISOString().slice(0, 10)} onChange={(e) => generateTimeOptions(e.target.value)}  {...register("fechavalue", { required: true })} />
-                        <select id="time" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value == 'hour' ? null : e.target.value)}>
-                            <option value="hour" hidden>Hour</option>
-                            {
-                                hAvlable.map((item, id) => {
-                                    return <option key={id} value={item}>{item}</option>
-                                })
-                            }
-                        </select>
-                        {selectedTime !== 'hour' && (
-                            <select name="" id="">
-                                <option value="30">30m</option>
-                                {/* <                      {hAvlable.includes(
-                                    new Date(timeToCompare.getTime() + (60 * 60 * 1000))
-                                        .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                                ) && (
-                                        <option value="60">1h</option>
-                                    )}> */}
-                            </select>
-                        )}
+                        <form>
+                            <div className="form-group row">
+                                <label htmlFor="date" className="col-sm-2 hd:row-form-label col-form-label font-bold">Date</label>
+                                <div className="col-sm-10">
+                                    <input
+                                        type="date"
+                                        name="fechavalue"
+                                        id="fechavalue"
+                                        className="hd:text-end form-control-plaintext"
+                                        defaultValue={new Date().toISOString().split('T')[0]}
+                                        min={new Date().toISOString().slice(0, 10)}
+                                        {...register('fechavalue', { required: true })}
+                                        onChange={(e) => generateTimeOptions(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label htmlFor="hour" className="col-sm-2 col-form-label font-bold">Hour</label>
+                                <div className="col-sm-10">
+                                    <select id="time" className='form-control-plaintext hd:text-end'
+                                        value={selectedTime}
+                                        onChange={(e) => setSelectedTime(e.target.value == 'hour' ? null : e.target.value)}>
+                                        <option value="hour" hidden>Hour</option>
+                                        {
+                                            hAvlable.map((item, id) => {
+                                                return <option key={id} value={item}>{item}</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            {selectedTime !== 'hour' && (
+                                <div className="form-group row">
+                                    <label htmlFor="time" className="col-sm-2 col-form-label font-bold">Time</label>
+                                    <div className="col-sm-10">
+                                        <select className='form-control-plaintext hd:text-end' id="time">
+                                            <option value="30">30m</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            )}
+                        </form>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={reserve}>Reserve Now!</button>
+                        <button type="button" className="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="modal-reserve-btn"
+                            data-bs-dismiss="modal" className="btn btn-primary"
+                            onClick={reserve}>Reserve Now!</button>
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }

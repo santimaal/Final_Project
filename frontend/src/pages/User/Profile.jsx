@@ -33,17 +33,6 @@ export default function Profile() {
                 </div>
               </div>
             )}
-            {/* Incident */}
-            {user.opt_profile && (
-              <>
-                <div className="col-lg-8 h-[80vh]">
-                  <div className="card mb-4 bg-black ">
-                    {/* <Incident /> */}
-                    <h1>jefe</h1>
-                  </div>
-                </div>
-              </>
-            )}
           </div>
         </div>
       </section>

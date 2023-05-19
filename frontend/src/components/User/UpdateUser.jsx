@@ -66,7 +66,7 @@ export default function UpdateUser() {
       setCheck({...check, chat_id: '' });
       await navigator.clipboard.writeText(form.chatID);
       updateUser(form);
-      window.open("https://web.telegram.org/z/#5944160111", "_blank");
+      window.open("https://web.telegram.org/a/#6294975032", "_blank");
     };
   
   // Control Regex errors
@@ -264,21 +264,7 @@ export default function UpdateUser() {
                 <div className="p_avatar btn_profile bg-white" onClick={ClickTelegram}>
                   <img  src="https://i.postimg.cc/L5J3J8kf/telegram.png" alt="Icon Telegram" className="avatar"/>  
                 </div>
-                <div className="p_avatar btn_profile ml-9" onClick={() => {setUser({...user, opt_profile : true })} }c>
-                  <img  src="https://i.postimg.cc/SKpnJLj4/image-1.png" alt="Icon incidences" className="avatar"/>  
-                </div>
-                {isAdmin && (
-                  <div className="p_avatar btn_profile ml-9" onClick={() => {setUser({...user, opt_profile : false })} }c>
-                    <img  src="https://i.postimg.cc/cLF8W2MP/list-incidents-people.png" alt="Icon List Rent" className="avatar"/>  
-                  </div>
-                )}
-                {!isAdmin && (
-                  <div className="p_avatar btn_profile ml-9" onClick={() => {setUser({...user, opt_profile : false })} }c>
-                    <img  src="https://i.postimg.cc/Pf159vqv/image.png" alt="Icon List Rent" className="avatar"/>  
-                  </div>
-                )}
               </div>
-               
               </>
             )}
             </div>
